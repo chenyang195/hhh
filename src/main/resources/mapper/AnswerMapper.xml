@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhang.application.mapper.AnswerMapper">
+    <insert id="addAnswer" parameterType="com.zhang.application.pojo.Answer" useGeneratedKeys="true" keyProperty="id">
+    insert into answer
+        (q1,
+        q2,
+        w1,
+        applicant_id)
+        values
+        (#{answer.q1},
+        #{answer.q2},
+        #{answer.w1},
+        #{answer.applicantId}
+        )
+    </insert>
+
+
+
+</mapper>
