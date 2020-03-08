@@ -1,6 +1,7 @@
 package com.zhang.application.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -11,36 +12,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
     //求职者登录注册
-    @RequestMapping("/applicantReg")
+    @GetMapping("/applicantReg")
     public String applicantReg(){
         return "applicantReg";
     }
-    @RequestMapping("/applicantLog")
+    @GetMapping("/applicantLog")
     public String applicantLog(){
         return "applicantLog";
     }
     //推荐者登录注册
-    @RequestMapping("/staffLog")
+    @GetMapping("/staffLog")
     public String staffLog(){
         return "staffLog";
     }
-    @RequestMapping("/staffReg")
+    @GetMapping("/staffReg")
     public String staffReg(){
         return "staffReg";
     }
     //HR登录通道
-    @RequestMapping("/hrLog")
+    @GetMapping("/hrLog")
     public String hrLog(){
         return "hrLog";
     }
     //管理员登录通道
-    @RequestMapping("/adminLog")
+    @GetMapping("/adminLog")
     public String adminLog(){
         return "adminLog";
     }
 
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index(){
         return "index";
     }

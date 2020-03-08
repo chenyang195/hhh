@@ -11,5 +11,5 @@ import org.apache.ibatis.annotations.Param;
  */
 @Mapper
 public interface AnswerMapper {
-    public Integer addAnswer(@Param("answer")Answer answer);
+    public Integer addAnswer(@Param("answer") Answer answer);
 }
