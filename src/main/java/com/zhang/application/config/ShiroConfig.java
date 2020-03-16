@@ -1,9 +1,16 @@
 package com.zhang.application.config;
 
 
-import com.zhang.application.realm.UserRealm;
+import com.zhang.application.realm.AdminRealm;
+import com.zhang.application.realm.ApplicantRealm;
+import com.zhang.application.realm.StaffRealm;
+import org.apache.http.client.AuthenticationStrategy;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
+import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
+import org.apache.shiro.authz.ModularRealmAuthorizer;
 import org.apache.shiro.codec.Base64;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -12,6 +19,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -23,6 +32,9 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("securityManager")DefaultWebSecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+
+
+
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         /**
@@ -40,29 +52,45 @@ public class ShiroConfig {
         filterMap.put("/css/**","anon");
         filterMap.put("/js/**","anon");
         filterMap.put("/release/**","anon");
-
+        filterMap.put("/question","perms[answerer:answer]");
         filterMap.put("/","anon");
         filterMap.put("/*","anon");
 
 
 
 
+
+
         //设置未认证跳转页面
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/index");
         //设置未授权跳转页面
         shiroFilterFactoryBean.setUnauthorizedUrl("/noAuth");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }
+
+
     /**
      * 创建DefaultWebSecurityManager
      */
     @Bean(name = "securityManager")
-    public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("userRealm") UserRealm userRealm){
+    public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("applicantRealm") ApplicantRealm applicantRealm,
+                                                                  @Qualifier("staffRealm") StaffRealm staffRealm,
+                                                                  @Qualifier("adminRealm") AdminRealm adminRealm){
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //设置Realm
-        securityManager.setRealm(userRealm);
+        MultiRealmAuthenticator modularRealmAuthenticator = new MultiRealmAuthenticator();
 
+        modularRealmAuthenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
+        securityManager.setAuthenticator(modularRealmAuthenticator);
+        Collection<Realm> realms = new ArrayList<>();
+        realms.add(applicantRealm);
+        realms.add(staffRealm);
+        realms.add(adminRealm);
+
+        securityManager.setRealms(realms);
+       /* ModularRealmAuthorizer modularRealmAuthorizer = new ModularRealmAuthorizer();
+        securityManager.setAuthorizer(modularRealmAuthorizer);*/
         securityManager.setRememberMeManager(rememberMeManager());
 
         return securityManager;
@@ -70,12 +98,26 @@ public class ShiroConfig {
     /**
      * 创建Realm
      */
-    @Bean(name ="userRealm" )
-    public UserRealm getRealm(HashedCredentialsMatcher hashedCredentialsMatcher){
-        UserRealm userRealm= new UserRealm();
+    @Bean(name ="applicantRealm" )
+    public ApplicantRealm getApplicantRealm(HashedCredentialsMatcher hashedCredentialsMatcher){
+        ApplicantRealm applicantRealm = new ApplicantRealm();
         //配置加密
-        userRealm.setCredentialsMatcher(hashedCredentialsMatcher);
-        return userRealm;
+        applicantRealm.setCredentialsMatcher(hashedCredentialsMatcher);
+        return applicantRealm;
+    }
+    @Bean(name ="staffRealm" )
+    public StaffRealm getStaffRealm(HashedCredentialsMatcher hashedCredentialsMatcher){
+        StaffRealm staffRealm = new StaffRealm();
+        //配置加密
+        staffRealm.setCredentialsMatcher(hashedCredentialsMatcher);
+        return staffRealm;
+    }
+    @Bean(name ="adminRealm" )
+    public AdminRealm getAdminRealm(HashedCredentialsMatcher hashedCredentialsMatcher){
+        AdminRealm adminRealm = new AdminRealm();
+        //配置加密
+        adminRealm.setCredentialsMatcher(hashedCredentialsMatcher);
+        return adminRealm;
     }
 
 
