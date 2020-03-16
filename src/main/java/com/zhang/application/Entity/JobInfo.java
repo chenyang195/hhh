@@ -12,7 +12,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "job_info", schema = "zhang", catalog = "")
 public class JobInfo {
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String describe;
     private Date startTime;
     private Date endTime;
@@ -22,11 +23,11 @@ public class JobInfo {
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

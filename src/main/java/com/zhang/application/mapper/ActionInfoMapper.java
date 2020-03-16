@@ -3,6 +3,7 @@ package com.zhang.application.mapper;
 
 import com.zhang.application.Entity.ActionInfo;
 import com.zhang.application.Entity.AdminInfo;
+import com.zhang.application.pojo.TkMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @Date: Created in 17:26 2020/3/5
  */
 @Mapper
-@Component(value = "ActionInfoMapper")
+//@Component(value = "ActionInfoMapper")
 public interface ActionInfoMapper extends TkMapper<ActionInfo> {
 
 

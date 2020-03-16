@@ -1,5 +1,7 @@
 package com.zhang.application.Entity;
 
+import com.zhang.application.pojo.Question;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,22 +12,34 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "essay_question_info", schema = "zhang", catalog = "")
-public class EssayQuestionInfo {
-    private int id;
+public class EssayQuestionInfo extends Question {
+    @Override
+    public String toString() {
+        return "EssayQuestionInfo{" +
+                "id=" + id +
+                ", problem='" + problem + '\'' +
+                ", keys='" + kkeys + '\'' +
+                ", relevanceJobId=" + relevanceJobId +
+                ", fullMarksKeysNum=" + fullMarksKeysNum +
+                '}';
+    }
+
+
     private String problem;
-    private String keys;
-    private int relevanceJobId;
-    private int fullMarksKeysNum;
+    private String kkeys;
+    private Integer relevanceJobId;
+    private Integer fullMarksKeysNum;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
+
 
     @Basic
     @Column(name = "problem")
@@ -40,30 +54,30 @@ public class EssayQuestionInfo {
     @Basic
     @Column(name = "keys")
     public String getKeys() {
-        return keys;
+        return kkeys;
     }
 
     public void setKeys(String keys) {
-        this.keys = keys;
+        this.kkeys = keys;
     }
 
     @Basic
     @Column(name = "relevance_job_id")
-    public int getRelevanceJobId() {
+    public Integer getRelevanceJobId() {
         return relevanceJobId;
     }
 
-    public void setRelevanceJobId(int relevanceJobId) {
+    public void setRelevanceJobId(Integer relevanceJobId) {
         this.relevanceJobId = relevanceJobId;
     }
 
     @Basic
     @Column(name = "full_marks_keys_num")
-    public int getFullMarksKeysNum() {
+    public Integer getFullMarksKeysNum() {
         return fullMarksKeysNum;
     }
 
-    public void setFullMarksKeysNum(int fullMarksKeysNum) {
+    public void setFullMarksKeysNum(Integer fullMarksKeysNum) {
         this.fullMarksKeysNum = fullMarksKeysNum;
     }
 
@@ -76,11 +90,14 @@ public class EssayQuestionInfo {
                 relevanceJobId == that.relevanceJobId &&
                 fullMarksKeysNum == that.fullMarksKeysNum &&
                 Objects.equals(problem, that.problem) &&
-                Objects.equals(keys, that.keys);
+                Objects.equals(kkeys, that.kkeys);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, problem, keys, relevanceJobId, fullMarksKeysNum);
+        return Objects.hash(id, problem, kkeys, relevanceJobId, fullMarksKeysNum);
     }
+
+
+
 }

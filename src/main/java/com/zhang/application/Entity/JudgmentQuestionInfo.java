@@ -1,5 +1,7 @@
 package com.zhang.application.Entity;
 
+import com.zhang.application.pojo.Question;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,18 +12,27 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "judgment_question_info", schema = "zhang", catalog = "")
-public class JudgmentQuestionInfo {
-    private int id;
+public class JudgmentQuestionInfo extends Question {
+    @Override
+    public String toString() {
+        return "JudgmentQuestionInfo{" +
+                "id=" + id +
+                ", problem='" + problem + '\'' +
+                ", answer='" + answer + '\'' +
+                '}';
+    }
+
+
     private String problem;
-    private String answer;
+    private Integer answer;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -37,11 +48,11 @@ public class JudgmentQuestionInfo {
 
     @Basic
     @Column(name = "answer")
-    public String getAnswer() {
+    public Integer getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(Integer answer) {
         this.answer = answer;
     }
 

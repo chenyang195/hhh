@@ -1,5 +1,7 @@
 package com.zhang.application.Entity;
 
+
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -12,26 +14,26 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "applicant_info", schema = "zhang", catalog = "")
-public class ApplicantInfo {
-    private int id;
+public class ApplicantInfo extends User {
+
+
     private String name;
-    private String phoneNum;
-    private String passwrod;
+
+    private String password;
     private String imageUrl;
     private Timestamp createTime;
     private Date birthday;
     private String idCardNum;
     private int relevanceJobId;
-
     @Id
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
-
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
+
 
     @Basic
     @Column(name = "name")
@@ -41,6 +43,21 @@ public class ApplicantInfo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "ApplicantInfo{" +
+                "name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", createTime=" + createTime +
+                ", birthday=" + birthday +
+                ", idCardNum='" + idCardNum + '\'' +
+                ", relevanceJobId=" + relevanceJobId +
+                ", id=" + id +
+                ", phoneNum='" + phoneNum + '\'' +
+                '}';
     }
 
     @Basic
@@ -54,13 +71,13 @@ public class ApplicantInfo {
     }
 
     @Basic
-    @Column(name = "passwrod")
-    public String getPasswrod() {
-        return passwrod;
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswrod(String passwrod) {
-        this.passwrod = passwrod;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Basic
@@ -122,7 +139,7 @@ public class ApplicantInfo {
                 relevanceJobId == that.relevanceJobId &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(phoneNum, that.phoneNum) &&
-                Objects.equals(passwrod, that.passwrod) &&
+                Objects.equals(password, that.password) &&
                 Objects.equals(imageUrl, that.imageUrl) &&
                 Objects.equals(createTime, that.createTime) &&
                 Objects.equals(birthday, that.birthday) &&
@@ -131,6 +148,10 @@ public class ApplicantInfo {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, phoneNum, passwrod, imageUrl, createTime, birthday, idCardNum, relevanceJobId);
+        return Objects.hash(id, name, phoneNum, password, imageUrl, createTime, birthday, idCardNum, relevanceJobId);
     }
+
+
+
+
 }

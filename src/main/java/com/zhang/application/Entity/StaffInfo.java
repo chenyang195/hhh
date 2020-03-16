@@ -12,11 +12,12 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "staff_info", schema = "zhang", catalog = "")
-public class StaffInfo {
-    private int id;
+@SuppressWarnings("ALL")
+public class StaffInfo extends User {
+
     private String name;
     private String phoneNum;
-    private String passwrod;
+    private String password;
     private String imageUrl;
     private Timestamp createTime;
     private Date birthday;
@@ -24,11 +25,11 @@ public class StaffInfo {
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -53,13 +54,13 @@ public class StaffInfo {
     }
 
     @Basic
-    @Column(name = "passwrod")
-    public String getPasswrod() {
-        return passwrod;
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswrod(String passwrod) {
-        this.passwrod = passwrod;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Basic
@@ -110,7 +111,7 @@ public class StaffInfo {
         return id == staffInfo.id &&
                 Objects.equals(name, staffInfo.name) &&
                 Objects.equals(phoneNum, staffInfo.phoneNum) &&
-                Objects.equals(passwrod, staffInfo.passwrod) &&
+                Objects.equals(password, staffInfo.password) &&
                 Objects.equals(imageUrl, staffInfo.imageUrl) &&
                 Objects.equals(createTime, staffInfo.createTime) &&
                 Objects.equals(birthday, staffInfo.birthday) &&
@@ -119,6 +120,6 @@ public class StaffInfo {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, phoneNum, passwrod, imageUrl, createTime, birthday, idCardNum);
+        return Objects.hash(id, name, phoneNum, password, imageUrl, createTime, birthday, idCardNum);
     }
 }

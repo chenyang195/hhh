@@ -11,6 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "answer_info", schema = "zhang", catalog = "")
 public class AnswerInfo {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String answers;
     private double score;

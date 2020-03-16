@@ -10,38 +10,58 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "applicant_role", schema = "zhang", catalog = "")
-public class ApplicantRole {
-    private int id;
-    private int staffId;
-    private int roleId;
+public class ApplicantRole extends UserRole{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Override
+    public String toString() {
+        return "ApplicantRole{" +
+                "id=" + id +
+                ", roleId=" + roleId +
+                ", userId=" + userId +
+                ", roleName='" + roleName + '\'' +
+                '}';
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    @Basic
+    @Column(name = "role_name")
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "staff_id")
-    public int getStaffId() {
-        return staffId;
-    }
 
-    public void setStaffId(int staffId) {
-        this.staffId = staffId;
-    }
 
     @Basic
     @Column(name = "role_id")
-    public int getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
@@ -51,12 +71,12 @@ public class ApplicantRole {
         if (o == null || getClass() != o.getClass()) return false;
         ApplicantRole that = (ApplicantRole) o;
         return id == that.id &&
-                staffId == that.staffId &&
+                userId == that.userId &&
                 roleId == that.roleId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, staffId, roleId);
+        return Objects.hash(id, userId, roleId);
     }
 }

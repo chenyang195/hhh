@@ -1,5 +1,7 @@
 package com.zhang.application.Entity;
 
+import com.zhang.application.pojo.Question;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,8 +12,9 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "choice_question_info", schema = "zhang", catalog = "")
-public class ChoiceQuestionInfo {
-    private int id;
+public class ChoiceQuestionInfo extends Question {
+
+
     private String problem;
     private String optionA;
     private String optionB;
@@ -22,11 +25,11 @@ public class ChoiceQuestionInfo {
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

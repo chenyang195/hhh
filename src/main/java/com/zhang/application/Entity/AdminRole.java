@@ -10,40 +10,30 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "admin_role", schema = "zhang", catalog = "")
-public class AdminRole {
-    private int id;
-    private int adminId;
-    private int roleId;
+public class AdminRole extends UserRole {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    private String roleName;
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "admin_id")
-    public int getAdminId() {
-        return adminId;
-    }
-
-    public void setAdminId(int adminId) {
-        this.adminId = adminId;
-    }
-
-    @Basic
-    @Column(name = "role_id")
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -51,12 +41,12 @@ public class AdminRole {
         if (o == null || getClass() != o.getClass()) return false;
         AdminRole adminRole = (AdminRole) o;
         return id == adminRole.id &&
-                adminId == adminRole.adminId &&
+                userId == adminRole.userId &&
                 roleId == adminRole.roleId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, adminId, roleId);
+        return Objects.hash(id, userId, roleId);
     }
 }

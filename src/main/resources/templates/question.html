@@ -3,21 +3,128 @@
 	<head>
 		<meta charset="utf-8">
 		<title>问卷</title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+		<script src="../layui/layui.js"></script>
+		<script type="text/javascript">
+		//Demo
+		layui.use('form', function(){
+		  	var form = layui.form;
+			var questions ;
+			$.ajax({
+				url: "/getQuestions",
+				async: false,
+
+				success: function (data) {
+					if (data != "") {
+						dataJSON = JSON.parse(data);
+						questions = dataJSON;
+					}else {
+						alert("系统繁忙！")
+					}
+				}
+			})
+		  
+
+		var choiceQuestionInfos = questions.choiceQuestionInfos;
+		var essayQuestionInfos = questions.essayQuestionInfos;
+		var judgmentQuestionInfos = questions.judgmentQuestionInfos;
+		var pageHTML = "";
+		pageHTML+="<h2 style='margin-left: 3.125rem;'>一、单项选择题</h2><br />";
+		
+		$.each(choiceQuestionInfos,function(i,val){
+		           pageHTML += "<div class='layui-form-item' style='font-size: 1rem;'>";
+				   pageHTML += "<h3 style='margin-left: 6.25rem;'>";
+				   pageHTML += (i+1)+". ";
+				   pageHTML += val.problem
+				   pageHTML += "</h3><br /><div class='layui-input-block' style='font-size: 1rem;'>";
+				   pageHTML += "<input type='radio' name='x"+val.id+"' value='a' title='A. ";
+				   pageHTML += val.optionA;
+				   pageHTML += "'><br />"
+				   pageHTML += "<input type='radio' name='x"+val.id+"' value='a' title='B. ";
+				   pageHTML += val.optionB;
+				   pageHTML += "'><br />"
+				   pageHTML += "<input type='radio' name='x"+val.id+"' value='a' title='C. ";
+				   pageHTML += val.optionC;
+				   pageHTML += "'><br />"
+				   pageHTML += "<input type='radio' name='x"+val.id+"' value='a' title='D. ";
+				   pageHTML += val.optionD;
+				   pageHTML += "'><br /></div></div>";
+				   
+		});
+		
+		pageHTML+="<h2 style='margin-left: 3.125rem;'>二、判断题</h2><br />";
+		$.each(judgmentQuestionInfos,function(i,val){
+			pageHTML += "<div class='layui-form-item' style='font-size: 1rem;'>";
+			pageHTML += "<h3 style='margin-left: 6.25rem;'>";
+			pageHTML += (i+1)+". ";
+			pageHTML += val.problem;
+			pageHTML += "</h3><br /><div class='layui-input-block' style='font-size: 1rem;'>";
+			pageHTML += "<input type='radio' name='p"+val.id+"' value='1' title='";
+			pageHTML += "正确";
+			pageHTML += "'><br />"
+			pageHTML += "<input type='radio' name='p"+val.id+"' value='0' title='";
+			pageHTML += "错误";
+			pageHTML += "'><br /></div></div>";
+			
+		});
+		
+		pageHTML+="<h2 style='margin-left: 3.125rem;'>三、简答题</h2><br />";
+		$.each(essayQuestionInfos,function(i,val){
+			pageHTML += "<div class='layui-form-item' style='font-size: 1rem;'>";
+			pageHTML += "<h3 style='margin-left: 6.25rem;'>";
+			pageHTML += (i+1)+". ";
+			pageHTML += val.problem;
+			pageHTML += "</h3><br /><div class='layui-input-block'><textarea name='w";
+			pageHTML += val.id;
+			pageHTML += "' placeholder='请输入内容' class='layui-textarea'></textarea></div></div>"
+			
+		});
+		pageHTML += "<div class='layui-form-item'><div class='layui-input-block'>";
+		pageHTML +=	"<button class='layui-btn' lay-submit lay-filter='formDemo'>立即提交</button></div></div>";
+		$("#q-form").append(pageHTML);
+		form.render();
+		//监听提交
+		form.on('submit(formDemo)', function(data){
+		  layer.msg(JSON.stringify(data.field));
+		  return false;
+		});  
+		});
+		</script>
+		
+		 <script >
+			$.ajax({
+				url: "/getWebMsg",
+				async: true,
+
+				success: function (data) {
+					if (data != "") {
+						alert(data);
+					}
+				}
+			})
+
+		</script>
+		<script type="text/javascript">
+			function load(){
+				
+				alert("答题开始，请于120分钟内作答，若有其他疑问请联系HR!");
+			}
+		</script>
 	</head>
-	<body>
-		<form action="/subAns" method="post">
-		这是第一个选择题：</br>
-		<input type="radio" name="q1" value="a">A.这是选项A</br>
-		<input type="radio" name="q1" value="b">B.这是选项B</br>
-		<input type="radio" name="q1" value="c">C.这是选项C</br>
-		<input type="radio" name="q1" value="d">D.这是选项D</br>
-		这是第一个判断题：</br>
-		<input type="radio" name="q2" value="true">对</br>
-		<input type="radio" name="q2" value="false">错</br>
-		问答题：</br>
-		<textarea name="w1"></textarea><br />
-		<input type="submit" value="提交"/>
+	<body style="margin-left: 3rem;margin-right: 3rem;" onload="load()">
+		<h1 style="text-align: center;">招聘问卷</h1>
+		<p style="text-align: right;margin-right: 1.875rem;">当前剩余时间120分钟</p>
+		
+		<form class="layui-form" action="/subAns" method="post" id="q-form">
+			
+			
 		</form>
 		
+	
+		
+		
+		
+	
 	</body>
 </html>

@@ -2,14 +2,72 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		
 		<title>首页</title>
+		<link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+		<link rel="stylesheet" href="../css/index.css">
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		
+		 <script >
+			$.ajax({
+				url: "/getWebMsg",
+				async: true,
+
+				success: function (data) {
+					if (data != "") {
+						alert(data);
+					}
+				}
+			})
+
+		</script>
 	</head>
 	<body>
-		<a href="/applicantReg">求职注册</a><br />
-		<a href="/applicantLog">求职登录</a><br />
-		<a href="/staffReg">员工注册</a><br />
-		<a href="/staffLog">员工登录</a><br />
-		<a href="/adminLog">管理员登录</a><br />
-		<a href="/hrLog">HR登录</a><br />
+		<ul class="layui-nav" style="background-color:transparent;color:#4F9F5F ";>
+			<span class= "logo"style="color:#4F9F5F;">
+				<img src="../pic/绿色国寿财.png" alt="layui" style="width: 20%;padding-top: 0.5rem;
+				float:left;">
+				<div style="font-size: 1.25rem;
+				padding-top: 0.78rem;
+				
+				">西藏分公司人事招聘系统</div>
+			</span>
+		</ul>
+		<ul class="layui-nav layui-layout-right" style="background-color:transparent ;">
+			<span>
+				<div style="padding-top: 0.78rem;">
+				<a href=""style="font-size: 1.25rem;color:#4F9F5F;text-align: right;">个人中心</a>
+				</div>
+			</span>
+		</ul>
+		<div style="margin-left: 10rem;">
+		<div class="index-bottons">
+			<button class="index-botton-button">
+				<a class="index-botton-button-a" href="applicantReg">求职注册</a>
+			</button>
+			<button class="index-botton-button">
+				<a class="index-botton-button-a" href="applicantLog">求职登录</a>
+			</button>
+			<button class="index-botton-button">
+				<a class="index-botton-button-a" href="staffReg">员工注册</a>
+			</button>
+			<button class="index-botton-button">
+				<a class="index-botton-button-a" href="staffLog">员工登录</a>
+			</button><br /><br /><br />
+			<button class="index-botton-button">
+				<a class="index-botton-button-a" href="adminLog">管理员登录</a>
+			</button>
+			<button class="index-botton-button">
+				<a class="index-botton-button-a" href="hrLog">HR登录</a>
+			</button>
+			<button class="index-botton-button">
+				<a class="index-botton-button-a" href="question">回答问题</a>
+			</button>
+			<button class="index-botton-button">
+				<a class="index-botton-button-a" href="logoutme">退出登录</a>
+			</button>
+		</div>
+		</div>
+		
 	</body>
 </html>

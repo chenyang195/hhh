@@ -1,6 +1,8 @@
 package com.zhang.application.mapper;
 
 import com.zhang.application.Entity.ChoiceQuestionInfo;
+import com.zhang.application.pojo.QuestionMapper;
+import com.zhang.application.pojo.TkMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -11,5 +13,5 @@ import org.springframework.stereotype.Component;
  */
 @Mapper
 @Component(value = "ChoiceQuestionInfoMapper")
-public interface ChoiceQuestionInfoMapper extends TkMapper<ChoiceQuestionInfo>{
+public interface ChoiceQuestionInfoMapper extends QuestionMapper<ChoiceQuestionInfo> {
 }

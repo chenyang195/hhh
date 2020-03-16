@@ -19,7 +19,7 @@ public class VerificationCodeUtil {
         // 验证码字符个数
         int codeCount = 4;
         // 验证码干扰线数
-        int lineCount = 150;
+        int lineCount = 100;
         // 验证码
         String code = null;
         // 验证码图片Buffer
@@ -29,9 +29,11 @@ public class VerificationCodeUtil {
         Map<String, String> map = new HashMap<>();
 
         // 验证码范围,去掉0(数字)和O(拼音)容易混淆的(小写的1和L也可以去掉,大写不用了)
-        char[] codeSequence = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+        char[] codeSequence = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J',
                 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
-                'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+                'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7', '8', '9','a','b',
+                'd','e','f','i','j','k','g','h','n','p','r','s','t','u','v','w',
+                'x','y'};
 
         int x = 0, fontHeight = 0, codeY = 0;
         int red = 0, green = 0, blue = 0;

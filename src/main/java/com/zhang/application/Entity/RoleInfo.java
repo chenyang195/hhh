@@ -11,16 +11,26 @@ import java.util.Objects;
 @Entity
 @Table(name = "role_info", schema = "zhang", catalog = "")
 public class RoleInfo {
-    private int id;
+    @Override
+    public String toString() {
+        return "RoleInfo{" +
+                "id=" + id +
+                ", roleName='" + roleName + '\'' +
+                '}';
+    }
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    private Integer id;
     private String roleName;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

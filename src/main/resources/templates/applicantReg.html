@@ -3,6 +3,20 @@
 	<head>
 		<meta charset="utf-8">
 		<title>注册</title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script >
+			$.ajax({
+				url: "/getWebMsg",
+				async: true,
+
+				success: function (data) {
+					if (data != "") {
+						alert(data);
+					}
+				}
+			})
+
+		</script>
 	</head>
 	<body>
 		<form action="/applicantReg" method="post">
@@ -11,6 +25,7 @@
 			密码：<input type="text"  name="password"/><br />
 			再次输入密码：<input type="text" name="password2" /><br />
 			推荐人工号(可不填)<input type="text" name="staffNum" /><br />
+
 			<input type="submit" value="注册"/>
 		</form>
 	</body>

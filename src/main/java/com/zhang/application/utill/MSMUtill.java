@@ -4,6 +4,11 @@ package com.zhang.application.utill;
 
 
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +18,7 @@ import java.util.Map;
  * @Date: Created in 21:35 2020/3/3
  */
 public class MSMUtill {
-   /* public static boolean sendMSM(String phoneNum,String content) {
+    public static boolean sendMSM(String phoneNum,String content) {
         String host = "https://dxyzm.market.alicloudapi.com";
         String path = "/chuangxin/dxjk";
         String method = "POST";
@@ -23,22 +28,28 @@ public class MSMUtill {
         headers.put("Authorization", "APPCODE " + appcode);
         Map<String, String> querys = new HashMap<String, String>();
         //测试可用默认短信模板,测试模板为专用模板不可修改,如需自定义短信内容或改动任意字符,请联系旺旺或QQ726980650进行申请
-        querys.put("content", content);
+        querys.put("content", "【创信】你的验证码是：5873，3分钟内有效！");
         querys.put("mobile", phoneNum);
         Map<String, String> bodys = new HashMap<String, String>();
 
         try {
-            *//**
-             * 重要提示如下:
-             * HttpUtils请从
-             * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/src/main/java/com/aliyun/api/gateway/demo/util/HttpUtils.java
-             * 下载
-             *
-             * 相应的依赖请参照
-             * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/pom.xml
-             *//*
+
             HttpResponse response = HttpUtils.doPost(host, path, method, headers, querys, bodys);
-            System.out.println(response.toString());
+
+        /* "ReturnStatus": "Success",
+        "Message": "ok",
+        "RemainPoint": 420842,
+        "TaskID": 18424321,
+        "SuccessCounts": 1*/
+           /* HttpParams params = response.getParams();
+
+            String returnStatus = (String) params.getParameter("ReturnStatus");
+            if (returnStatus.equals("Success")){
+                return true;
+            }
+            System.out.println(params.getParameter("Message"));*/
+            System.out.println(EntityUtils.toString(response.getEntity()));
+
             return true;
             //获取response的body
             //System.out.println(EntityUtils.toString(response.getEntity()));
@@ -46,5 +57,5 @@ public class MSMUtill {
             e.printStackTrace();
             return false;
         }
-    }*/
+    }
 }

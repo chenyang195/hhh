@@ -10,19 +10,20 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "admin_info", schema = "zhang", catalog = "")
-public class AdminInfo {
-    private int id;
-    private String phoneNum;
+public class AdminInfo extends User {
+
+
+
     private String name;
     private String password;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

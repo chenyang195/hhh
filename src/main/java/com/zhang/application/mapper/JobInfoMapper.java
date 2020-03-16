@@ -3,6 +3,7 @@ package com.zhang.application.mapper;
 
 import com.zhang.application.Entity.JobInfo;
 import com.zhang.application.Entity.RoleAction;
+import com.zhang.application.pojo.TkMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 

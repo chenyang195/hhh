@@ -11,37 +11,58 @@ import java.util.Objects;
 @Entity
 @Table(name = "role_action", schema = "zhang", catalog = "")
 public class RoleAction {
-    private int id;
-    private int roleId;
-    private int actionId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private Integer roleId;
+    private Integer actionId;
+    private String actionName;
+
+    @Override
+    public String toString() {
+        return "RoleAction{" +
+                "id=" + id +
+                ", roleId=" + roleId +
+                ", actionId=" + actionId +
+                ", actionName='" + actionName + '\'' +
+                '}';
+    }
+
+    public String getActionName() {
+        return actionName;
+    }
+
+    public void setActionName(String actionName) {
+        this.actionName = actionName;
+    }
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "role_id")
-    public int getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
     @Basic
     @Column(name = "action_id")
-    public int getActionId() {
+    public Integer getActionId() {
         return actionId;
     }
 
-    public void setActionId(int actionId) {
+    public void setActionId(Integer actionId) {
         this.actionId = actionId;
     }
 

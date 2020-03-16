@@ -3,9 +3,23 @@
 	<head>
 		<meta charset="utf-8">
 		<title>注册</title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script >
+			$.ajax({
+				url: "/getWebMsg",
+				async: true,
+
+				success: function (data) {
+					if (data != "") {
+						alert(data);
+					}
+				}
+			})
+
+		</script>
 	</head>
 	<body>
-		<form action="/applicantReg">
+		<form action="/staffReg">
 			手机号：<input type="text" /><button>发送验证码</button><br />
 			验证码：<input type="text" /><br />
 			工号(必填)<input type="text" /><br />

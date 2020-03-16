@@ -3,6 +3,8 @@ package com.zhang.application.mapper;
 
 import com.zhang.application.Entity.StaffInfo;
 ;
+import com.zhang.application.pojo.TkMapper;
+import com.zhang.application.pojo.UserMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Mapper
 @Component(value = "staffInfoMapper")
-public interface StaffInfoMapper extends TkMapper<StaffInfo> {
+public interface StaffInfoMapper extends UserMapper<StaffInfo> {
 
 
 }
